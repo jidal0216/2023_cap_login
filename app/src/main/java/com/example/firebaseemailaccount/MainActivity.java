@@ -2,9 +2,9 @@ package com.example.firebaseemailaccount;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -32,7 +32,24 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
         //탈퇴 처리
-        // mFirebaseAuth.getCurrentUser().delete()
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button btn_delete = findViewById(R.id.btn_revoke);
+
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mFirebaseAuth.getCurrentUser().delete();
+
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
     }
 }
